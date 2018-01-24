@@ -7,34 +7,35 @@
 # равнобедренный и равносторонний, но не прямоугольный.
 
 print "Input A: "
-a = gets.to_i
+a = gets.to_f
 print "Input B: "
-b = gets.to_i
+b = gets.to_f
 print "Input C: "
-c = gets.to_i
+c = gets.to_f
 
 if a == b && b == c 
-	puts "This triangle is equilateral and isosceles, but not right-angled!"
-	exit
+  puts "This triangle is equilateral and isosceles, but not right-angled!"
+  exit
 end
 
 arr = [a, b, c].sort
 
 if arr[1] == arr[2]
-	puts "This triangle is isosceles, but not right-angled!"
-	exit
+  puts "This triangle is isosceles, but not right-angled!"
+  exit
 else
-cat1 = arr[0]
-cat2 = arr[1]
-hypo = arr[2]
+  cat1 = arr[0]
+  cat2 = arr[1]
+  hypo = arr[2]
+  right = hypo**2 == cat1**2 + cat2**2
 end
 
-if cat1 == cat2 && hypo**2 == cat1**2 + cat2**2
-	puts "This triangle is isosceles and right-angled!"
+if cat1 == cat2 && right
+  puts "This triangle is isosceles and right-angled!"
 elsif cat1 == cat2 
-	puts "This triangle is isosceles, but not right-angled!"
-elsif hypo**2 == cat1**2 + cat2**2
-	puts "This triangle is right-angled!"
+  puts "This triangle is isosceles, but not right-angled!"
+elsif right
+  puts "This triangle is right-angled!"
 else
-	puts "This triangle is not right-angled!"
+  puts "This triangle is not right-angled!"
 end

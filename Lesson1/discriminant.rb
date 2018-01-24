@@ -6,26 +6,28 @@
 #   Если D < 0, то выводим дискриминант и сообщение "Корней нет"
 
 
-  print "Input a: "
-  a = gets.to_f
-  print "Input b: "
-  b = gets.to_f
-  print "Input c: "
-  c = gets.to_f
+print "Input a: "
+a = gets.to_f
+print "Input b: "
+b = gets.to_f
+print "Input c: "
+c = gets.to_f
 
 
 d = b**2 - 4 * a * c
 
+
 if d > 0
-	x1 = (-b + Math.sqrt(d)) / (2 * a) 
-	x2 = (-b - Math.sqrt(d)) / (2 * a)
-	puts "D = #{d}, х1 = #{x1}, х2 = #{x2}"
+  ms = Math.sqrt(d)
+  x1 = (-b + ms) / (2 * a) 
+  x2 = (-b - ms) / (2 * a)
+  puts "D = #{d}, х1 = #{x1}, х2 = #{x2}"
 
 elsif d == 0
-	x = -b / (2 * a)
-	puts "D = 0, х = #{x}"
+  x = -b / (2 * a)
+  puts "D = 0, х = #{x}"
 
 else
-	puts "The equation has no solution."
+  puts "The equation has no solution."
 
 end
