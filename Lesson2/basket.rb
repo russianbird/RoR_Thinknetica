@@ -18,9 +18,12 @@ loop do
   print "Input amount: "
   amount = gets.to_f
   basket[item] = {cost: cost, amount: amount}
-  total += cost * amount
 end
 
-basket.each {|i, ca| puts "#{i}:  " + "#{ca[:cost]}  " + "#{ca[:amount]}  " + "#{ca[:cost] * ca[:amount]}"}
+
+basket.each do |product, value|
+  puts "#{product}:  " + "#{value[:cost]}  " + "#{value[:amount]}  " + "#{value[:cost] * value[:amount]}"
+  total += value[:cost] * value[:amount]
+end
 
 puts total

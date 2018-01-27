@@ -4,10 +4,9 @@ arr = []
 
 i = 5
 
-loop do 
+while i < 100
   i += 5
   arr << i
-  break if i >= 100
 end
 
 puts arr
