@@ -11,3 +11,10 @@ if weight >= 0
 else
   puts "#{name}, your ideal weight is already optimal!"
 end
+
+fdgjikgfhjlkfdghkdfg
+vfcvfcjvbnlkjvnjkn
+c bvcbvbxvn
+cv bdxkln dnfjzd
+jhjkj
+hvbhvjgvkgvk
