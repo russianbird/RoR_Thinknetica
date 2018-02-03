@@ -20,7 +20,7 @@ class Train
   end
 
   def remove_car
-    @cars -= 1 if @speed == 0
+    @cars -= 1 if @speed == 0 && @cars > 0
   end
 
   def add_route(route)
@@ -34,22 +34,30 @@ class Train
   end
 
   def next_station
-    @current_route.station_list[@station_index + 1]
+    @current_route.station_list[@station_index + 1] if @station_index != -1
   end
 
   def previous_station
-    @current_route.station_list[@station_index - 1]
+    @current_route.station_list[@station_index - 1] if @station_index != 0
   end
 
   def go_next
-    current_station.train_depart(self)
-    @station_index += 1
-    current_station.train_arrive(self)
+    if current_station != @current_route.station_list.last
+      current_station.train_depart(self)
+      @station_index += 1
+      current_station.train_arrive(self)
+    else
+      current_station
+    end
   end
 
   def go_back
-    current_station.train_depart(self)
-    @station_index -= 1
-    current_station.train_arrive(self)
+    if current_station != @current_route.station_list.first
+      current_station.train_depart(self)
+      @station_index -= 1
+      current_station.train_arrive(self)
+    else
+      current_station
+    end
   end
 end

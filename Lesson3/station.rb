@@ -14,4 +14,8 @@ class Station
   def train_depart(train)
     @train_list.delete(train)
   end
+
+  def count_type(type)
+    @train_list.count {|train| train.type == type}
+  end
 end
