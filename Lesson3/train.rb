@@ -34,11 +34,17 @@ class Train
   end
 
   def next_station
-    @current_route.station_list[@station_index + 1] if @station_index != -1
+    if current_station != @current_route.station_list.last
+    @current_route.station_list[@station_index + 1]
+    else
+    puts 'There is nothing ahead'
   end
 
   def previous_station
-    @current_route.station_list[@station_index - 1] if @station_index != 0
+    if current_station != @current_route.station_list.first
+    @current_route.station_list[@station_index - 1]
+    else
+    puts 'There is nothing behind'
   end
 
   def go_next
