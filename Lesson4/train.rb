@@ -1,7 +1,5 @@
 class Train
-
-  attr_accessor :speed
-  attr_reader :number, :cars_list
+  attr_reader :speed, :number, :cars_list
 
   def initialize(number, type)
     @number = number
@@ -12,9 +10,11 @@ class Train
   end
 
   def speed_up
-    puts "What speed do you prefer now?"
-    @speed = gets.chomp
+    @speed += 10
   end
+
+  def speed_down
+    @speed > 9 ? @speed -= 10 : @speed
 
   def brake
     @speed = 0

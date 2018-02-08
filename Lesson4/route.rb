@@ -1,5 +1,4 @@
 class Route
-
   attr_reader :name, :station_list
 
   def initialize(first, last)
