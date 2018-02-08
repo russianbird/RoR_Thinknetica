@@ -3,7 +3,7 @@ class Train
   attr_accessor :speed
   attr_reader :number, :cars_list
 
-  def initialize (number, type)
+  def initialize(number, type)
     @number = number
     @type = type
     @cars_list = []
@@ -11,23 +11,28 @@ class Train
     @station_index = 0
   end
 
+  def speed_up
+    puts "What speed do you prefer now?"
+    @speed = gets.chomp
+  end
+
   def brake
     @speed = 0
   end
 
   def add_car(car)
-    if @speed == 0 && check_type(car)
-    @cars_list << car
+    if @speed == 0 && right_type?(car)
+      @cars_list << car
     else
-      "You should stop first or check another car"
+      puts "You should stop first or check another car"
     end
   end
 
   def remove_car
     if @speed == 0 && !@cars_list.empty?
-    @cars_list.pop
+      @cars_list.pop
     else
-      "You don't have enough cars or your speed is too high."
+      puts "You don't have enough cars or your speed is too high."
     end
   end
 
@@ -43,17 +48,17 @@ class Train
 
   def next_station
     if current_station != @current_route.station_list.last
-    @current_route.station_list[@station_index + 1]
+      @current_route.station_list[@station_index + 1]
     else
-    puts 'There is nothing ahead'
+      puts 'There is nothing ahead'
     end
   end
 
   def previous_station
     if current_station != @current_route.station_list.first
-    @current_route.station_list[@station_index - 1]
+      @current_route.station_list[@station_index - 1]
     else
-    puts 'There is nothing behind'
+      puts 'There is nothing behind'
     end
   end
 

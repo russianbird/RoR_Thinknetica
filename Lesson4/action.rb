@@ -6,76 +6,52 @@ class Action
   @routes = []
   end
 
+  def start
+    display_menu
+    choose_action
+  end
+
+  private # а)потому что нет наследников, б)потому что они не вызываются извне
+
   def display_menu
     puts "What are you gonna do now?"
     puts "Push 1 to make a station"
-    puts "Push 2 to make a train"
-    puts "Push 3 to build a new route"
-    puts "Push 4 to change an existing route"
-    puts "Push 5 to set up a route"
-    puts "Push 6 to add cars"
-    puts "Push 7 to remove cars"
-    puts "Push 8 to move a train"
-    puts "Push 9 to display stations and trains lists"
-    puts "Push 10 for exit"
+    puts "Push 2 to make a passenger train"
+    puts "Push 3 to make a cargo train"
+    puts "Push 4 to build a new route"
+    puts "Push 5 to add station to the route"
+    puts "Push 6 to remove station from the route"
+    puts "Push 7 to set up a route"
+    puts "Push 8 to add cars"
+    puts "Push 9 to remove cars"
+    puts "Push 10 to move a train to the next station"
+    puts "Push 11 to move a train to the previous station"
+    puts "Push 12 to display stations and trains lists"
+    puts "Push 13 for exit"
   end
 
   def choose_action
     loop do
-      puts "Choose 1-10 for action or 0 for menu"
+      puts "Choose 1-13 for action or 0 for menu"
       choice = gets.chomp
       case choice
-      when "0"
-        display_menu
-      when "1"
-        make_station
-      when "2"
-        puts "Push 1 for passenger train"
-        puts "Push 2 for cargo train"
-        choice1 = gets.chomp
-        case choice1
-        when "1"
-          make_passenger_train
-        when "2"
-          make_cargo_train
-        end
-      when "3"
-        build_route
-      when "4"
-        puts "Push 1 to add station to the route"
-        puts "Push 2 to remove station from the route"
-        choice2 = gets.chomp
-        case choice2
-        when "1"
-          expand_route
-        when "2"
-          reduce_route
-        end
-      when "5"
-          join_route
-      when "6"
-        add_train_cars
-      when "7"
-        remove_train_cars
-      when "8"
-        puts "Push 1 to move forward"
-        puts "Push 2 to move backward"
-        choice3 = gets.chomp
-        case choice3
-        when "1"
-          move_forward
-        when "2"
-          move_backward
-        end
-      when "9"
-        display_stations_trains_list
-      when "10"
-        exit
+        when "0" then display_menu
+        when "1" then make_station
+        when "2" then make_passenger_train
+        when "3" then make_cargo_train
+        when "4" then build_route
+        when "5" then expand_route
+        when "6" then reduce_route
+        when "7" then join_route
+        when "8" then add_train_cars
+        when "9" then remove_train_cars
+        when "10" then move_forward
+        when "11" then move_backward
+        when "12" then display_stations_trains_list
+        when "13" then exit
       end
     end
   end
-
-    private # а)потому что нет наследников, б)потому что они не вызываются извне
 
     def make_station
       puts "Name the station"
