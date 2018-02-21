@@ -66,8 +66,8 @@ class Action
   def make_passenger_train
     puts "Set up a train number. "
     number = gets.chomp
-    @trains << PassengerTrain.new(number, type = "Passenger")
-    puts "#{type} train No #{number} is ready to go!"
+    @trains << PassengerTrain.new(number)
+    puts "Passenger train No #{number} is ready to go!"
   rescue RuntimeError => e
     puts e.message
     retry
@@ -76,8 +76,11 @@ class Action
   def make_cargo_train
     puts "Set up a train number"
     number = gets.chomp
-    @trains << CargoTrain.new(number, type = "Cargo")
-    puts "#{type} train No #{number} is ready to go!"
+    @trains << CargoTrain.new(number)
+    puts "Cargo train No #{number} is ready to go!"
+  rescue RuntimeError => e
+    puts e.message
+    retry
   end
 
   def build_route

@@ -1,7 +1,9 @@
 require_relative 'instance_counter'
+require_relative 'validation'
 
 class Station
   include InstanceCounter
+  include Validation
 
   attr_reader :name, :train_list
 
@@ -14,17 +16,11 @@ class Station
   end
 
   def initialize(name)
-    validate!
-    register_instance
     @name = name
     @train_list = []
     @@stations << self
-  end
-
-  def valid?
     validate!
-  rescue
-    false
+    register_instance
   end
 
   def train_arrive(train)
@@ -43,7 +39,7 @@ class Station
 
   def validate!
     raise "Name can't be nil" if name.nil?
-    raise "Name should be at least 3 symbols" if number.length < 3
+    raise "Name should be at least 3 symbols" if name.length < 3
     raise "Name has invalid format" if name !~ NAME_FORMAT
     true
   end

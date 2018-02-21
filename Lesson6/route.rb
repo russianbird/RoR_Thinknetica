@@ -1,21 +1,17 @@
 require_relative 'instance_counter'
+require_relative 'validation'
 
 class Route
   include InstanceCounter
+  include Validation
 
   attr_reader :name, :station_list
 
   def initialize(first, last)
-    register_instance
     @station_list = [first, last]
     @name = first.name + "––" + last.name
     validate!
-  end
-
-  def valid?
-    validate!
-  rescue
-    false
+    register_instance
   end
 
   def add_station(station)

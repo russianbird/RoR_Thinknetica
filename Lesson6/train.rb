@@ -1,9 +1,11 @@
 require_relative 'producing_company'
 require_relative 'instance_counter'
+require_relative 'validation'
 
 class Train
   include ProducingCompany
   include InstanceCounter
+  include Validation
 
   attr_reader :speed, :number, :cars_list
 
@@ -16,20 +18,14 @@ class Train
   end
 
   def initialize(number, type)
-    register_instance
     @number = number
-    validate!
     @type = type
     @cars_list = []
     @speed = 0
     @station_index = 0
-    @@trains[number] = self
-  end
-
-  def valid?
     validate!
-  rescue
-    false
+    @@trains[number] = self
+    register_instance
   end
 
   def speed_up
@@ -112,6 +108,10 @@ class Train
     raise "Number can't be nil" if number.nil?
     raise "Number should be at least 5 symbols" if number.length < 5
     raise "Number has invalid format" if number !~ NUMBER_FORMAT
+    raise 'Numbers cannot be duplicated' unless @@trains[number].nil?
+    unless @type == "Cargo" || @type == "Passenger"
+      raise "Invalid train type"
+    end
     true
   end
 end
