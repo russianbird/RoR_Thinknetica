@@ -10,6 +10,7 @@ class Train
   attr_reader :speed, :number, :cars_list
 
   NUMBER_FORMAT = /^[a-z0-9]{3}-?[a-z0-9]{2}$/i
+  TYPES = ["Cargo", "Passenger"]
 
   @@trains = {}
 
@@ -20,10 +21,10 @@ class Train
   def initialize(number, type)
     @number = number
     @type = type
+    validate!
     @cars_list = []
     @speed = 0
     @station_index = 0
-    validate!
     @@trains[number] = self
     register_instance
   end
@@ -109,8 +110,8 @@ class Train
     raise "Number should be at least 5 symbols" if number.length < 5
     raise "Number has invalid format" if number !~ NUMBER_FORMAT
     raise 'Numbers cannot be duplicated' unless @@trains[number].nil?
-    unless @type == "Cargo" || @type == "Passenger"
-      raise "Invalid train type"
+    raise "Invalid train type" unless TYPES.include(@type)
+
     end
     true
   end
