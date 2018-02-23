@@ -14,7 +14,7 @@ class Car
   end
 
   def take_space(space)
-    @free_space -= space
+    @free_space -= space if @free_space >= space
   end
 
   def purchased_space

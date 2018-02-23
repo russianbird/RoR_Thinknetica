@@ -1,5 +1,5 @@
 class PassengerCar < Car
-  def take_space(space = 1)
-    super(space) unless @free_space.zero?
+  def take_space
+    super(1)
   end
 end
