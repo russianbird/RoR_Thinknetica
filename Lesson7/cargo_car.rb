@@ -1,6 +1,5 @@
 class CargoCar < Car
-  def take_space(capacity)
-    rest_space = @free_space - capacity
-    @free_space -= capacity if rest_space >= 0
+  def take_space(space)
+    super(space) if @free_space >= space
   end
 end

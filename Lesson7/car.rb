@@ -13,6 +13,10 @@ class Car
     @number = @@wagon_number += 1
   end
 
+  def take_space(space)
+    @free_space -= space
+  end
+
   def purchased_space
     @all_space - @free_space
   end
