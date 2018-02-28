@@ -14,16 +14,16 @@ class Action
 
   def display_menu
     [
-    "Push 1 to make a station", "Push 2 to make a passenger train",
-    "Push 3 to make a cargo train", "Push 4 to build a new route",
-    "Push 5 to add station to the route", "Push 6 to remove station from the route",
-    "Push 7 to set up a route", "Push 8 to add cars", "Push 9 to remove cars",
-    "Push 10 to move a train to the next station",
-    "Push 11 to move a train to the previous station",
-    "Push 12 to display stations and trains lists", 
-    "Push 13 to buy ticket or capacity",
-    "Push 14 to display all available stations, trains and cars", "Push 15 for exit"
-   ].each { |action| puts action }
+      "Push 1 to make a station", "Push 2 to make a passenger train",
+      "Push 3 to make a cargo train", "Push 4 to build a new route",
+      "Push 5 to add station to the route", "Push 6 to remove station from the route",
+      "Push 7 to set up a route", "Push 8 to add cars", "Push 9 to remove cars",
+      "Push 10 to move a train to the next station",
+      "Push 11 to move a train to the previous station",
+      "Push 12 to display stations and trains lists",
+      "Push 13 to buy ticket or capacity",
+      "Push 14 to display all available stations, trains and cars", "Push 15 for exit"
+    ].each { |action| puts action }
   end
 
   def choose_action
@@ -31,22 +31,22 @@ class Action
       puts "Choose 1-13 for action or 0 for menu"
       choice = gets.chomp
       case choice
-        when "0" then display_menu
-        when "1" then make_station
-        when "2" then make_passenger_train
-        when "3" then make_cargo_train
-        when "4" then build_route
-        when "5" then expand_route
-        when "6" then reduce_route
-        when "7" then join_route
-        when "8" then add_train_cars
-        when "9" then remove_train_cars
-        when "10" then move_forward
-        when "11" then move_backward
-        when "12" then display_station_trains
-        when "13" then use_car_space
-        when "14" then display_stations_trains_cars
-        when "15" then exit
+      when "0" then display_menu
+      when "1" then make_station
+      when "2" then make_passenger_train
+      when "3" then make_cargo_train
+      when "4" then build_route
+      when "5" then expand_route
+      when "6" then reduce_route
+      when "7" then join_route
+      when "8" then add_train_cars
+      when "9" then remove_train_cars
+      when "10" then move_forward
+      when "11" then move_backward
+      when "12" then display_station_trains
+      when "13" then use_car_space
+      when "14" then display_stations_trains_cars
+      when "15" then exit
       end
     end
   end
@@ -59,7 +59,7 @@ class Action
   end
 
   def all_stations
-    @stations.each.with_index(1) {|station, index| puts "#{index} - #{station.name}"}
+    @stations.each.with_index(1) { |station, index| puts "#{index} - #{station.name}" }
   end
 
   def make_passenger_train
@@ -84,29 +84,35 @@ class Action
 
   def build_route
     all_stations
-    puts "Choose the first station index"
-    first = @stations[gets.to_i - 1]
-    puts "Choose the last station index"
-    last = @stations[gets.to_i - 1]
-    route = Route.new(first, last)
+    route = Route.new(choose_first, choose_last)
     @routes << route
     puts "Route #{route.name} is builded"
   end
 
+  def choose_first
+    puts "Choose the first station index"
+    @stations[gets.to_i - 1]
+  end
+
+  def choose_last
+    puts "Choose the last station index"
+    @stations[gets.to_i - 1]
+  end
+
   def all_routes
-    @routes.each.with_index(1) {|route, index| puts "#{index} - #{route.name}"}
+    @routes.each.with_index(1) { |route, index| puts "#{index} - #{route.name}" }
   end
 
   def route_choice
     all_routes
     puts "Choose the route index"
-    route = @routes[gets.to_i - 1]
+    @routes[gets.to_i - 1]
   end
 
   def station_choice
     all_stations
     puts "Choose the station index"
-    station = @stations[gets.to_i - 1]
+    @stations[gets.to_i - 1]
   end
 
   def expand_route
@@ -126,7 +132,7 @@ class Action
   end
 
   def all_trains
-    @trains.each.with_index(1) {|train, index| puts "#{index} - #{train}"}
+    @trains.each.with_index(1) { |train, index| puts "#{index} - #{train}" }
   end
 
   def train_choice
@@ -161,17 +167,25 @@ class Action
     print "Choose a car 1 upto #{train.cars_list.size}: "
     car = train.cars_list[gets.to_i - 1]
     if car.is_a?(PassengerCar)
-      puts "Passenger car No #{car.number}. Amount of free sits: #{car.free_space}."
-      puts ":::::: PURCHASING TICKET ::::::"
-      car.take_space
-      puts "#{car.free_space} sits are available for purchasing."
+      purchase_ticket
     else
-      puts "Cargo car No #{car.number}. Space available for purchasing: #{car.free_space}."
-      print "How many units of space you want to purchase? "
-      puts ":::::: PURCHASING SPACE ::::::"
-      car.take_space(gets.to_i)
-      puts "#{car.free_space} units of space are available for purchasing."
+      purchase_cargo_space
     end
+  end
+
+  def purchase_ticket
+    puts "Passenger car No #{car.number}. Amount of free sits: #{car.free_space}."
+    puts ":::::: PURCHASING TICKET ::::::"
+    car.take_space
+    puts "#{car.free_space} sits are available for purchasing."
+  end
+
+  def purchase_cargo_space
+    puts "Cargo car No #{car.number}. Space available for purchasing: #{car.free_space}."
+    print "How many units of space you want to purchase? "
+    puts ":::::: PURCHASING SPACE ::::::"
+    car.take_space(gets.to_i)
+    puts "#{car.free_space} units of space are available for purchasing."
   end
 
   def remove_train_cars
@@ -194,7 +208,7 @@ class Action
 
   def display_station_trains
     station = station_choice
-    station.trains.each { |train| puts "#{train.number} – #{train.class} – #{train.cars_list.size}"}
+    station.trains.each { |train| puts "#{train.number} – #{train.class} – #{train.cars_list.size}" }
   end
 
   def display_stations_trains_cars

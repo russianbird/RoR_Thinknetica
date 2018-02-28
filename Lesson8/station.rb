@@ -32,7 +32,7 @@ class Station
   end
 
   def count_type(type)
-    @train_list.count {|train| train.type == type}
+    @train_list.count { |train| train.type == type }
   end
 
   def each_train
