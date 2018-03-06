@@ -25,7 +25,11 @@ class Route
   private
 
   def validate!
-    raise "Choose a Station class object." unless @stations.first.is_a?(Station) && @stations.last.is_a?(Station)
+    raise "Choose a Station class object." unless @station.right_object?
     true
+  end
+
+  def right_object
+    @stations.first.is_a?(Station) && @stations.last.is_a?(Station)
   end
 end

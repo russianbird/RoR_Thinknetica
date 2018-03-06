@@ -162,15 +162,19 @@ class Action
   end
 
   def use_car_space
-    train = train_choice
-    puts "#{train.class} No #{train.number} has #{train.cars_list.size} cars."
-    print "Choose a car 1 upto #{train.cars_list.size}: "
+    choose_car
     car = train.cars_list[gets.to_i - 1]
     if car.is_a?(PassengerCar)
       purchase_ticket
     else
       purchase_cargo_space
     end
+  end
+
+  def choose_car
+    train = train_choice
+    puts "#{train.class} No #{train.number} has #{train.cars_list.size} cars."
+    print "Choose a car 1 upto #{train.cars_list.size}: "
   end
 
   def purchase_ticket
@@ -208,7 +212,9 @@ class Action
 
   def display_station_trains
     station = station_choice
-    station.trains.each { |train| puts "#{train.number} – #{train.class} – #{train.cars_list.size}" }
+    station.trains.each do |train|
+      puts "#{train.number} – #{train.class} – #{train.cars_list.size}"
+    end
   end
 
   def display_stations_trains_cars

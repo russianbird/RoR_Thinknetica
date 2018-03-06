@@ -110,11 +110,15 @@ class Train
   protected
 
   def validate!
-    raise "Number can't be nil" if number.nil?
-    raise "Number should be at least 5 symbols" if number.length < 5
-    raise "Number has invalid format" if number !~ NUMBER_FORMAT
+    check_number
     raise "Numbers cannot be duplicated" unless @@trains[number].nil?
     raise "Invalid train type" unless TYPES.include(@type)
     true
+  end
+
+  def check_number
+    raise "Number can't be nil" if number.nil?
+    raise "Number should be at least 5 symbols" if number.length < 5
+    raise "Number has invalid format" if number !~ NUMBER_FORMAT
   end
 end
