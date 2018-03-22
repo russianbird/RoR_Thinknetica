@@ -9,15 +9,13 @@ class Train
   include Validation
   include Accessors
 
+  NUMBER_FORMAT = /^[a-z0-9]{3}-?[a-z0-9]{2}$/i
+
   attr_reader :speed, :number, :cars_list
-  attr_accessor_with_history :aaa, :bbb
-  strong_attr_accessor :ccc, Array
 
   validate :number, :presence
   validate :number, :type, String
   validate :number, :format, NUMBER_FORMAT
-
-  NUMBER_FORMAT = /^[a-z0-9]{3}-?[a-z0-9]{2}$/i
 
   @@trains = {}
 

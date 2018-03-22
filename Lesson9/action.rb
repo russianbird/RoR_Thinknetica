@@ -22,7 +22,8 @@ class Action
       "Push 11 to move a train to the previous station",
       "Push 12 to display stations and trains lists",
       "Push 13 to buy ticket or capacity",
-      "Push 14 to display all available stations, trains and cars", "Push 15 for exit"
+      "Push 14 to display all available stations, trains and cars", "Push 15 for exit",
+      "Push 16 to display station name history", "Push 17 to rename station"
     ].each { |action| puts action }
   end
 
@@ -47,8 +48,20 @@ class Action
       when "13" then use_car_space
       when "14" then display_stations_trains_cars
       when "15" then exit
+      when "16" then show_name_history
+      when "17" then rename_station
       end
     end
+  end
+
+  def show_name_history
+    puts station_choice.name_history
+  end
+
+  def rename_station
+    station = station_choice
+    puts "Set up new station name"
+    station.name = gets.chomp
   end
 
   def make_station
@@ -56,6 +69,9 @@ class Action
     name = gets.chomp
     @stations << Station.new(name)
     puts "Here is the new station - #{name}."
+  rescue RuntimeError => e
+    puts e.message
+    retry
   end
 
   def all_stations
@@ -87,6 +103,9 @@ class Action
     route = Route.new(choose_first, choose_last)
     @routes << route
     puts "Route #{route.name} is builded"
+  rescue RuntimeError => e
+    puts e.message
+    retry
   end
 
   def choose_first

@@ -1,16 +1,22 @@
 require_relative "producing_company"
+require_relative "accessors"
+require_relative "train"
 
 class Car
   include ProducingCompany
+  include Accessors
 
-  @@car_number = 0
+  # @@car_number = 0
 
-  attr_reader :all_space, :free_space, :number
+  attr_reader :all_space, :free_space
 
-  def initialize(space)
+  strong_attr_accessor :number, Integer
+
+  def initialize(space, number)
     @all_space = space
     @free_space = space
-    @number = @@car_number += 1
+    # @number = @@car_number += 1
+    self.number = number
   end
 
   def take_space(space)

@@ -19,14 +19,13 @@ module Validation
         values.each do |attr_name, params|
           attribute = instance_variable_get("@#{attr_name}")
           send(params[0].to_s, attribute, params[1])
-          puts "'#{attr_name} - #{params[0]}' validation is OK"
         end
       end
-      true
     end
 
     def valid?
       validate!
+      true
     rescue RuntimeError
       false
     end

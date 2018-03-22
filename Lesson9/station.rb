@@ -7,7 +7,8 @@ class Station
   include Validation
   include Accessors
 
-  attr_reader :name, :train_list
+  attr_reader :train_list
+  attr_accessor_with_history :name
 
   validate :name, :presence
 
